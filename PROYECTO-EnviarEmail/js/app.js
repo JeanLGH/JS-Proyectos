@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     divCC.classList.add("flex", "flex-col" ,"space-y-2");
     inputCC.classList.add("border", "border-gray-300", "px-3", "py-2", "rounded-lg");
     labelCC.classList.add("font-regular", "font-medium");
-    //asiganacion de atributos
+    //asignacion de atributos
     inputCC.setAttribute("type", "email");
     inputCC.setAttribute("id", "emailCC");
     inputCC.setAttribute("placeholder", "Destinatario copia");
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.target.value.trim() === "") {
             // Si está vacío, no hagas ninguna validación
             limpiarAlerta(e.target.parentElement);
-            email.emailCC = ""; // Asegúrate de actualizar el valor en el objeto email
+            email.emailCC = ""; 
             comprobarEmail();
             return;
         }
