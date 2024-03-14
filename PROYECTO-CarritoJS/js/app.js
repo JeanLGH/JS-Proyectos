@@ -12,9 +12,17 @@ function cargarEventListener(){
     actualizarEstadoBotonVaciarCarrito();
     //cuando se da click al botón de "agregando al carrito"
     listaFrutas.addEventListener("click", agregarFruta)
+
+    
+
     //elimina la fruta
     carrito.addEventListener("click", eliminarFruta)
 
+    //cargar del Local Storage
+    document.addEventListener("DOMContentLoaded", ()=>{
+        articuloCarrito= JSON.parse(localStorage.getItem("carrito") || []);
+        carritoHtml();
+    })
     //vaciar el carrito
     vaciarCarritoB.addEventListener("click", ()=>{
         articuloCarrito=[];
@@ -118,7 +126,12 @@ function carritoHtml(){
             </td>
         `
         contenedorCarrito.appendChild(row);
-    })
+    });
+    sincronizarStorage();
+}
+
+function sincronizarStorage(){
+    localStorage.setItem("carrito", JSON.stringify(articuloCarrito ))
 }
 
 //elimina las frutas del tbody
