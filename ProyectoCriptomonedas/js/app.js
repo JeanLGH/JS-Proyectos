@@ -23,17 +23,26 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 
-function consultarCriptomonedas() {
+async function consultarCriptomonedas() {
 
     const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
-
-    fetch(url)
-        .then(respuesta => respuesta.json())
-        .then(resultado => obtenerCriptomonedas(resultado.Data))
-        .then(criptomonedas => {
-            console.log(criptomonedas);
-            selectCriptomonedas(criptomonedas)
-        })
+    /** 
+     fetch(url)
+         .then(respuesta => respuesta.json())
+         .then(resultado => obtenerCriptomonedas(resultado.Data))
+         .then(criptomonedas => {
+             console.log(criptomonedas);
+             selectCriptomonedas(criptomonedas)
+         })
+     */
+    try {
+        const respuesta = await fetch(url);
+        const resultado = await respuesta.json()
+        const criptomonedas = await obtenerCriptomonedas(resultado.Data)
+        selectCriptomonedas(criptomonedas)
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function selectCriptomonedas(criptomonedas) {
@@ -93,17 +102,17 @@ function consultarAPI() {
     mostrarSpinner();
     fetch(url)
         .then(respuesta => respuesta.json())
-        .then(cotizacion => {mostrarCotizacionHTML(cotizacion.DISPLAY[criptomoneda][moneda])})
-        
+        .then(cotizacion => { mostrarCotizacionHTML(cotizacion.DISPLAY[criptomoneda][moneda]) })
 
-    
+
+
 }
 function mostrarCotizacionHTML(cotizacion) {
 
     limpiarHTML();
 
-    console.log("da",cotizacion);
-    const  { PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR, LASTUPDATE} = cotizacion;
+    console.log("da", cotizacion);
+    const { PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR, LASTUPDATE } = cotizacion;
     console.log(PRICE)
 
     const precio = document.createElement('p');
