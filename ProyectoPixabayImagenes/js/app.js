@@ -39,8 +39,9 @@ function mostrarAlerta(mensaje) {
     }
 }
 
-function buscarImagenes(termino) {
+async function buscarImagenes(termino) {
     const url = `https://pixabay.com/api/?key=${API_KEY}&q=${termino}&per_page=${REGISTROS_POR_PAGINA}&page=${paginaActual}`;
+    /** 
     fetch(url)
         .then(respuesta => respuesta.json())
         .then(resultado => {
@@ -51,6 +52,15 @@ function buscarImagenes(termino) {
             console.error('Error en la solicitud fetch:', error);
             // Maneja el error adecuadamente, por ejemplo, mostrando un mensaje de error al usuario.
         });
+    */
+    try {
+        const respuesta= await fetch (url);
+        const resultado = await respuesta.json()
+        totalPaginas = calcularPaginas(resultado.totalHits);
+        mostrarImagenes(resultado.hits);
+    } catch (error) {
+        console.error('Error en la solicitud fetch:', error);
+    }
 }
 
 function calcularPaginas(total) {
@@ -58,7 +68,7 @@ function calcularPaginas(total) {
 }
 
 function mostrarImagenes(imagenes) {
-    resultado.innerHTML = ""; 
+    resultado.innerHTML = "";
     imagenes.forEach(imagen => {
         const { likes, views, previewURL, largeImageURL } = imagen;
         const divImagen = document.createElement("div");
@@ -83,7 +93,7 @@ function mostrarImagenes(imagenes) {
 
 
 function actualizarPaginacion() {
-    paginacionDiv.innerHTML = ""; 
+    paginacionDiv.innerHTML = "";
     for (let i = 1; i <= totalPaginas; i++) {
         const botonPagina = document.createElement("a");
         botonPagina.href = "#";
