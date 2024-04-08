@@ -1,0 +1,18 @@
+{
+  "clientes": [
+    {
+      "nombre": "Yerimar",
+      "email": "Yerimarr@correo.com",
+      "telefono": "123455689",
+      "empresa": "Univalle CD",
+      "id": "120d"
+    },
+    {
+      "nombre": " Laura",
+      "email": "prueba@correo.com",
+      "telefono": "1234567890",
+      "empresa": "La hacienda",
+      "id": "7d7d"
+    }
+  ]
+}
